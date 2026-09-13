@@ -9,6 +9,7 @@
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
     "test": "turbo test",
+    "test:e2e": "turbo test:e2e",
     "dev:web": "pnpm --filter web dev",
     "dev:api": "pnpm --filter api dev",
     "infra:up": "docker compose up -d",
