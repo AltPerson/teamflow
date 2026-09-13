@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { PrismaModule } from './database/prisma/prisma.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
 import { HealthModule } from './modules/health/health.module.js';
 
 @Module({
@@ -18,7 +18,7 @@ import { HealthModule } from './modules/health/health.module.js';
       sortSchema: true,
     }),
 
-    PrismaModule,
+    AuthModule,
     HealthModule,
   ],
 })
