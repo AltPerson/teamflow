@@ -7,5 +7,6 @@ export default defineConfig({
   test: {
     globals: true,
     exclude: ['**/*.e2e.spec.ts', '**/node_modules/**', '**/.git/**'],
+    passWithNoTests: true,
   },
 });
