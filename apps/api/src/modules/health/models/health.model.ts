@@ -7,4 +7,7 @@ export class HealthModel {
 
   @Field(() => GraphQLISODateTime)
   timestamp!: Date;
+
+  @Field()
+  database!: string;
 }

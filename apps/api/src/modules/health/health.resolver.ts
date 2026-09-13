@@ -10,7 +10,7 @@ export class HealthResolver {
   @Query(() => HealthModel, {
     name: 'health',
   })
-  health(): HealthModel {
+  health(): Promise<HealthModel> {
     return this.healthService.check();
   }
 }
