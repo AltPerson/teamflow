@@ -1,9 +1,11 @@
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import type { GraphQLContext } from '../../graphql/graphql-context.type.js';
 import { UserModel } from '../users/models/user.model.js';
 import { AuthService } from './auth.service.js';
+import { JwtAuthGuard } from './guards/jwt-auth.guard.js';
 import { LoginInput } from './inputs/login.input.js';
 import { RegisterInput } from './inputs/register.input.js';
-import type { GraphQLContext } from '../../app.module.js';
 
 const FIFTEEN_MINUTES_MS = 15 * 60 * 1000;
 @Resolver()
@@ -36,6 +38,24 @@ export class AuthResolver {
       secure: false,
       maxAge: FIFTEEN_MINUTES_MS,
     });
+
+    return user;
+  }
+
+  @Query(() => UserModel)
+  @UseGuards(JwtAuthGuard)
+  async me(@Context() context: GraphQLContext): Promise<UserModel> {
+    const userId = context.req.user?.sub;
+
+    if (!userId) {
+      throw new UnauthorizedException();
+    }
+
+    const user = await this.authService.me(userId);
+
+    if (!user) {
+      throw new UnauthorizedException();
+    }
 
     return user;
   }

@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { LoginFormData, loginSchema } from "../_schemas/login.schema";
 import { LOGIN_MUTATION } from "../_graphql/login.mutation";
+import { LoginFormData, loginSchema } from "../_schemas/login.schema";
 
 const useLoginForm = () => {
   const {
@@ -25,7 +25,7 @@ const useLoginForm = () => {
     const { email, password } = data;
 
     try {
-      await loginUser({
+      const response = await loginUser({
         variables: {
           input: {
             email,
@@ -33,6 +33,7 @@ const useLoginForm = () => {
           },
         },
       });
+      console.log("response", response.data);
     } catch {}
   };
 

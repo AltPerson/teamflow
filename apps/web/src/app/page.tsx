@@ -12,7 +12,7 @@ export default function Home() {
             TeamFlow
           </Link>
 
-          <Button variant="ghost">Sign in</Button>
+          <Link href="/login">Sign in</Link>
         </nav>
 
         <section className="mx-auto mt-16 flex max-w-184 flex-1 flex-col pb-8 text-center md:mt-28">

@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module.js';
+import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +18,8 @@ async function bootstrap() {
     origin: 'http://localhost:3000',
     credentials: true,
   });
+
+  app.use(cookieParser());
 
   await app.listen(process.env.PORT ?? 4000);
 }
