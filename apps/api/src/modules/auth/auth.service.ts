@@ -26,4 +26,6 @@ export class AuthService {
       displayName,
     });
   }
+
+  async login() {}
 }
